@@ -20,6 +20,22 @@ class ViewController: UIViewController {
     // Dispose of any resources that can be recreated.
   }
 
-
+  @IBOutlet weak var emailAddress: UITextField!
+  @IBOutlet weak var password: UITextField!
+  
+  //  Clicking on login
+  @IBAction func pressLogin(_ sender: UIButton) {
+    // give up first responder priority
+    self.emailAddress.resignFirstResponder()
+    self.password.resignFirstResponder()
+  }
+  
+  override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+    
+    // end editing of all items 
+    self.view.endEditing(true)
+    
+  }
+  
 }
 

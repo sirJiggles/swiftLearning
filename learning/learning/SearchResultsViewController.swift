@@ -31,28 +31,28 @@ class SearchResultsViewController: UIViewController, UITableViewDataSource, UITa
         // Dispose of any resources that can be recreated.
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return tableData.count
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // Get the row data for the selected row
-        if let rowData = self.tableData[indexPath.row] as? NSDictionary,
+        if let rowData = self.tableData[(indexPath as NSIndexPath).row] as? NSDictionary,
             // Get the name of the track for this row
             name = rowData["trackName"] as? String,
             // Get the price of the track on this row
             formattedPrice = rowData["formattedPrice"] as? String {
-            let alert = UIAlertController(title: name, message: formattedPrice, preferredStyle: .Alert)
-            alert.addAction(UIAlertAction(title: "Ok", style: .Default, handler: nil))
-            self.presentViewController(alert, animated: true, completion: nil)
+            let alert = UIAlertController(title: name, message: formattedPrice, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
         }
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
-        let cell: UITableViewCell = tableView.dequeueReusableCellWithIdentifier(kCellIdentifier)! as UITableViewCell
+        let cell: UITableViewCell = tableView.dequeueReusableCell(withIdentifier: kCellIdentifier)! as UITableViewCell
         
-        if let rowData: NSDictionary = self.tableData[indexPath.row] as? NSDictionary,
+        if let rowData: NSDictionary = self.tableData[(indexPath as NSIndexPath).row] as? NSDictionary,
             // Grab the artworkUrl60 key to get an image URL for the app's thumbnail
             urlString = rowData["artworkUrl60"] as? String,
             // Create an NSURL instance from the String URL we get from the API
@@ -76,18 +76,18 @@ class SearchResultsViewController: UIViewController, UITableViewDataSource, UITa
                 else {
                     // The image isn't cached, download the img data
                     // We should perform this in a background thread
-                    let request: NSURLRequest = NSURLRequest(URL: imgURL)
+                    let request: URLRequest = URLRequest(url: imgURL as URL)
                     //let mainQueue = NSOperationQueue.mainQueue()
-                    let session = NSURLSession(configuration: NSURLSessionConfiguration.defaultSessionConfiguration())
-                    let task = session.dataTaskWithRequest(request, completionHandler: { (data, response, error) -> Void in
+                    let session = URLSession(configuration: URLSessionConfiguration.default())
+                    let task = session.dataTask(with: request, completionHandler: { (data, response, error) -> Void in
                         if error == nil {
                             // Convert the downloaded data in to a UIImage object
                             let image = UIImage(data: data!)
                             // Store the image in to our cache
                             self.imageCache[urlString] = image
                             // Update the cell
-                            dispatch_async(dispatch_get_main_queue(), {
-                                if let cellToUpdate = tableView.cellForRowAtIndexPath(indexPath) {
+                            DispatchQueue.main.async(execute: {
+                                if let cellToUpdate = tableView.cellForRow(at: indexPath) {
                                     cellToUpdate.imageView?.image = image
                                 }
                             })
@@ -103,8 +103,8 @@ class SearchResultsViewController: UIViewController, UITableViewDataSource, UITa
         return cell
     }
     
-    func didReceiveAPIResults(results: NSArray) {
-        dispatch_async(dispatch_get_main_queue(), {
+    func didReceiveAPIResults(_ results: NSArray) {
+        DispatchQueue.main.async(execute: {
             self.tableData = results
             self.appsTableView!.reloadData()
         })

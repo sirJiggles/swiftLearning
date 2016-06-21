@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11129.15" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11129.15" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11103.10"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -10,55 +11,77 @@
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="newBoston" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="KSv-pX-f7Z"/>
+                        <viewControllerLayoutGuide type="bottom" id="dCV-Jt-0mu"/>
+                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="pugBG" id="2C9-qW-WAs">
-                                <frame key="frameInset" width="320" height="667"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" id="558-fc-ixE">
-                                <frame key="frameInset" minX="102" minY="45" width="202" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pugBG" translatesAutoresizingMaskIntoConstraints="NO" id="2C9-qW-WAs"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="558-fc-ixE">
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" id="hku-mu-t0z">
-                                <frame key="frameInset" minX="102" minY="91" width="202" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hku-mu-t0z">
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Password" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="qfg-lb-Nbb">
-                                <frame key="frameInset" minX="16" minY="96" width="74" height="20.5"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Password:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qfg-lb-Nbb">
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Email" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ZqH-wQ-zJP">
-                                <frame key="frameInset" minX="16" minY="50" width="41" height="20.5"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Email:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZqH-wQ-zJP">
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P5S-23-M3C">
+                                <color key="backgroundColor" red="0.21589459907388631" green="0.77439466549236835" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="Login">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="pressLogin:" destination="BYZ-38-t0r" eventType="touchUpInside" id="8sf-uW-ExY"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="dCV-Jt-0mu" firstAttribute="top" secondItem="P5S-23-M3C" secondAttribute="bottom" constant="8" symbolic="YES" id="3Fe-2U-1Ps"/>
+                            <constraint firstItem="2C9-qW-WAs" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="52n-uR-Ouk"/>
+                            <constraint firstAttribute="trailing" secondItem="hku-mu-t0z" secondAttribute="trailing" constant="20" symbolic="YES" id="6MM-Y8-M7L"/>
+                            <constraint firstItem="hku-mu-t0z" firstAttribute="leading" secondItem="qfg-lb-Nbb" secondAttribute="trailing" constant="12" id="HBU-39-fqY"/>
+                            <constraint firstItem="qfg-lb-Nbb" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="16" id="NAy-ex-kKT"/>
+                            <constraint firstItem="hku-mu-t0z" firstAttribute="leading" secondItem="qfg-lb-Nbb" secondAttribute="trailing" constant="12" id="PJn-67-EaC"/>
+                            <constraint firstItem="558-fc-ixE" firstAttribute="leading" secondItem="ZqH-wQ-zJP" secondAttribute="trailing" constant="45" id="Q0g-Zw-ihW"/>
+                            <constraint firstItem="558-fc-ixE" firstAttribute="leading" secondItem="ZqH-wQ-zJP" secondAttribute="trailing" constant="45" id="Z9p-wN-dYu"/>
+                            <constraint firstItem="2C9-qW-WAs" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="topMargin" id="ZAZ-Yr-WfH"/>
+                            <constraint firstItem="ZqH-wQ-zJP" firstAttribute="top" secondItem="KSv-pX-f7Z" secondAttribute="bottom" constant="30" id="cct-DB-Ndj"/>
+                            <constraint firstAttribute="trailing" secondItem="558-fc-ixE" secondAttribute="trailing" constant="20" symbolic="YES" id="d34-UO-ExM"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="P5S-23-M3C" secondAttribute="trailing" constant="90" id="ebl-h5-pYg"/>
+                            <constraint firstItem="ZqH-wQ-zJP" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="16" id="fcV-z6-paf"/>
+                            <constraint firstItem="dCV-Jt-0mu" firstAttribute="top" secondItem="2C9-qW-WAs" secondAttribute="bottom" id="hNA-yE-rvt"/>
+                            <constraint firstItem="hku-mu-t0z" firstAttribute="top" secondItem="558-fc-ixE" secondAttribute="bottom" constant="16" id="lQd-Si-Gpy"/>
+                            <constraint firstAttribute="trailing" secondItem="2C9-qW-WAs" secondAttribute="trailing" id="nVC-Ci-hou"/>
+                            <constraint firstItem="qfg-lb-Nbb" firstAttribute="top" secondItem="ZqH-wQ-zJP" secondAttribute="bottom" constant="25" id="p4G-e2-cAt"/>
+                            <constraint firstItem="P5S-23-M3C" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="89" id="r5X-5y-37e"/>
+                            <constraint firstItem="558-fc-ixE" firstAttribute="top" secondItem="KSv-pX-f7Z" secondAttribute="bottom" constant="25" id="wZd-mL-H8Q"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="emailAddress" destination="558-fc-ixE" id="jTF-DZ-1rF"/>
+                        <outlet property="password" destination="hku-mu-t0z" id="dSI-7j-7f3"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="20" y="41"/>
+            <point key="canvasLocation" x="35.625" y="42.25352112676056"/>
         </scene>
     </scenes>
     <resources>
         <image name="pugBG" width="300" height="600"/>
     </resources>
-    <simulatedMetricsContainer key="defaultSimulatedMetrics">
-        <simulatedStatusBarMetrics key="statusBar"/>
-        <simulatedOrientationMetrics key="orientation"/>
-        <simulatedScreenMetrics key="destination" type="retina4_0.fullscreen"/>
-    </simulatedMetricsContainer>
 </document>
