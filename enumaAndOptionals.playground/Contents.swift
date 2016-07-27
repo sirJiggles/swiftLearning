@@ -77,8 +77,55 @@ enum ColorComponents {
 
 ColorComponents.RGB(red:61.0, green:120.0, blue:198.0, alpha:1.0).color()
 
+// POPULATING WITH DEFAULTS - RAW VALUES, need to be the same type
 
+enum Coin:Double {
+  case Penny = 0.01
+  case Nickel = 0.05
+  case Dime = 0.1
+  case Quarter = 0.25
+}
 
+let coins: [Coin] = [.Penny, .Nickel, .Dime, .Dime, .Quarter, .Quarter, .Quarter]
+
+func totalValue(coins: [Coin]) -> Double {
+  var total: Double = 0
+  for coin in coins {
+//    switch coin {
+//      // value of the enum does not chage as in penny is alawys 0.01
+//    case .Penny: total += 0.01
+//    case .Nickel: total += 0.05
+//    case .Dime: total += 0.1
+//    case .Quarter: total += 0.25
+//    }
+    // this replaces entire switch case
+    total += coin.rawValue
+  }
+  return total
+}
+
+totalValue(coins)
+
+//Raw value intializers
+enum Status: Int {
+  case Success = 200
+  case NotFound = 404
+}
+
+let state = 404
+// use raw value to get the correct enum else nil so is optional (failable initilizer)
+if let code = Status(rawValue: state) {
+  print(code)
+}
+
+enum Compass: Int {
+  case North = 1
+  case South
+  case East
+  case West
+}
+
+let direction = Compass(rawValue: 3)
 
 
 

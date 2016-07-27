@@ -54,6 +54,29 @@ if let lisa = subThing["lisa"], let rocks = lisa["rocks"] {
   print(rocks)
 }
 
+//struct Friend {
+//  let name: String
+//  let age: String
+//  let address: String?
+//  
+//  // just like a web API
+//  func createFriend(dict: [String:String]) -> Friend? {
+//    
+//    // this style is ... okay but it has issues when you have more than one optional as 
+//    // you end up nesting your assignments and optional unwrappers. coming up tomorrow, early exits :D
+//    if let name = dict["name"], let age = dict["age"]{
+//      let address = dict["address"]
+//      return Friend(name: name, age: age, address: address)
+//    } else {
+//      return nil
+//    }
+//  }
+//}
+
+// guards, use constant created outside the normal flow WITHOUT TRANSFERING CONTROL :D
+// it is an early exit construct
+// guard let someValue = someOptional else { return nil }
+
 struct Friend {
   let name: String
   let age: String
@@ -62,14 +85,37 @@ struct Friend {
   // just like a web API
   func createFriend(dict: [String:String]) -> Friend? {
     
-    // this style is ... okay but it has issues when you have more than one optional as 
-    // you end up nesting your assignments and optional unwrappers. coming up tomorrow, early exits :D
-    if let name = dict["name"], let age = dict["age"]{
-      let address = dict["address"]
-      return Friend(name: name, age: age, address: address)
-    } else {
+    guard let name = dict["name"], age = dict["age"] else {
       return nil
     }
+    let address = dict["address"]
+    
+    return Friend(name: name, age: age, address: address)
+    
+//    if let name = dict["name"], let age = dict["age"]{
+//      let address = dict["address"]
+//      return Friend(name: name, age: age, address: address)
+//    } else {
+//      return nil
+//    }
+  }
+}
+
+
+struct Book {
+  let title: String
+  let author: String
+  let price: String?
+  let pubDate: String?
+  
+  init?(dict:[String:String]){
+    guard let title = dict["title"], author = dict["author"] else {
+      return nil
+    }
+    self.title = title
+    self.author = author
+    self.price = dict["price"]
+    self.pubDate = dict["pubDate"]
   }
 }
 
