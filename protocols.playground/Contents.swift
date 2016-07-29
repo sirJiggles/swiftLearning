@@ -114,6 +114,7 @@ class Milk: Dairy, Blandable {
 // as a protocal is a type we can pass it in as a required type of param
 func makeSmoothy(ingredients: [Blandable]) {
   for ingredient in ingredients {
+    print("blending")
     
     // even though they are different, we can call the method we knoe they implement
     ingredient.blend()
@@ -124,5 +125,13 @@ let straw = Fruit(name: "Strawberry")
 let cheddar = Cheese(name: "Cheddar")
 let chocoMilk = Milk(name: "Cocolate Milk")
 
-// as they are different types is a obj c array, until we add type casting
+// as they are different types is a obj c array, until we add type casting aka the [Blendable] then
+// becomes an array of blendable types so protocols are also
 let ingredients:[Blandable] = [straw, chocoMilk]
+
+makeSmoothy(ingredients)
+
+
+/*************************************************************/
+
+
