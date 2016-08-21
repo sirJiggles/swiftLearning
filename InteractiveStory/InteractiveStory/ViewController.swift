@@ -8,17 +8,23 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UITextFieldDelegate {
   
   enum Error:ErrorType {
     case NoName
   }
   
   @IBOutlet weak var nameTextField: UITextField!
+  @IBOutlet weak var TextFieldBottomContraint: NSLayoutConstraint!
   
   override func viewDidLoad() {
     super.viewDidLoad()
     // Do any additional setup after loading the view, typically from a nib.
+    
+    // return singleton for notification center
+    NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ViewController.keyboardWillShow(_:)), name: UIKeyboardWillShowNotification, object: nil)
+    
+    NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ViewController.keyboardWillHide(_:)), name: UIKeyboardWillHideNotification, object: nil)
   }
 
   override func didReceiveMemoryWarning() {
@@ -46,11 +52,44 @@ class ViewController: UIViewController {
         
         presentViewController(alertController, animated: true, completion: nil)
       } catch let error {
-        fatalError(errorq)
+        fatalError()
       }
       
       
     }
+  }
+    
+  func keyboardWillShow(notifcation: NSNotification) {
+    if let userInfoDictionary = notifcation.userInfo, keyboardFrameValue = userInfoDictionary[UIKeyboardFrameEndUserInfoKey] as? NSValue {
+      // convert from ns value to cgrect
+      let keyboardFrame = keyboardFrameValue.CGRectValue()
+      
+      UIView.animateWithDuration(0.8, animations: {
+        self.TextFieldBottomContraint.constant = keyboardFrame.size.height - 60
+        self.view.layoutIfNeeded()
+      })
+      
+    }
+  }
+  
+  func keyboardWillHide(notification: NSNotification) {
+    UIView.animateWithDuration(0.8, animations: {
+      // back to original setting
+      self.TextFieldBottomContraint.constant = 40.0
+      self.view.layoutIfNeeded()
+    })
+  }
+  
+  // prior iOS 9, this is auto removed in newer versions!, so uncomment for now
+//  deinit {
+//    NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillShowNotification, object: nil)
+//  }
+  
+  // MARK: - UITextFieldDelegate
+  
+  func textFieldShouldReturn(textField: UITextField) -> Bool {
+    textField.resignFirstResponder()
+    return true
   }
 }
 

@@ -7,10 +7,13 @@
 //
 
 import UIKit
+import AudioToolbox
 
 class PageController: UIViewController {
   
   var page: Page?
+  
+  var sound: SystemSoundID = 0
   
   // we cant change the instance as let but can mutate the properties
   let artwork = UIImageView()
@@ -111,6 +114,8 @@ class PageController: UIViewController {
       let nextPage = firstChoice.page
       let pageController = PageController(page: nextPage)
       
+      playSound(nextPage.story.soundEffectURL)
+      
       // all view controllers have navigation controller
       // can ask the controller to push another controller to the stack, works like the suegue
       // here we call and pass the view controller
@@ -123,6 +128,8 @@ class PageController: UIViewController {
       let nextPage = secondChoice.page
       let pageController = PageController(page: nextPage)
       
+      playSound(nextPage.story.soundEffectURL)
+      
       navigationController?.pushViewController(pageController, animated: true)
     }
   }
@@ -130,6 +137,13 @@ class PageController: UIViewController {
   // unwind stack
   func playAgain() {
     navigationController?.popToRootViewControllerAnimated(true)
+  }
+  
+  func playSound(url: NSURL) {
+    // amp is in out param, memory address of variable where it stores its value
+    // location in memory where the value resides. "This is the lcation in memory where the value is"
+    AudioServicesCreateSystemSoundID(url, &sound)
+    AudioServicesPlaySystemSound(sound)
   }
   
 }
