@@ -40,19 +40,10 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
       super.viewDidLoad()
       
+      fetchCurrentWeather()
+      
 //      let icon = WeatherIcon.PartlyCloudyDay.image
 //      let currentWeather = CurrentWeather(temperature: 56.0, humidity: 0.3, chaceOfRain: 0.4, summary: "This is some text", icon: icon)
-      
-      forcastApiClient.fetchCurrentWeather(coordinate) { result in
-        switch result {
-        case .Sucess(let currentWeather):
-          self.display(currentWeather)
-        case .Failure(let error as NSError):
-          self.showAlert("Unable to recieve forcast", message: error.localizedDescription)
-        default: break
-        }
-
-      }
       
       
 //      let baseURL = NSURL(string: "https://api.forecast.io/forecast/\(forcastAPIKey)/")
@@ -84,6 +75,19 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
   
+  func fetchCurrentWeather() {
+    forcastApiClient.fetchCurrentWeather(self.coordinate) { result in
+      self.toggleRefreshAnimation(false)
+      switch result {
+      case .Sucess(let currentWeather):
+        self.display(currentWeather)
+      case .Failure(let error as NSError):
+        self.showAlert("Unable to recieve forcast", message: error.localizedDescription)
+      default: break
+      }
+    }
+  }
+  
   func display(weather: CurrentWeather) {
     currentTemperatureLabel.text = weather.temperatureString
     currentPrecipitationLabel.text = weather.chanceOfRainString
@@ -98,7 +102,22 @@ class ViewController: UIViewController {
     alertController.addAction(dismissAction)
     presentViewController(alertController, animated: true, completion: nil)
   }
-
+  
+  
+  
+  @IBAction func refreshWeather(sender: AnyObject) {
+    toggleRefreshAnimation(true)
+    fetchCurrentWeather()
+  }
+  
+  func toggleRefreshAnimation(on: Bool) {
+    refreshButton.hidden = on
+    if on {
+      activityIndicator.startAnimating()
+    } else {
+      activityIndicator.stopAnimating()
+    }
+  }
 
 }
 
