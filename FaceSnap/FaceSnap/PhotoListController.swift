@@ -11,13 +11,13 @@ import UIKit
 class PhotoListController: UIViewController {
     
     lazy var cameraButton: UIButton = {
-        let button = UIButton(type: .System)
+        let button = UIButton(type: .system)
         
-        button.setTitle("Camera", forState: .Normal)
-        button.tintColor = .whiteColor()
+        button.setTitle("Camera", for: UIControlState())
+        button.tintColor = .white
         button.backgroundColor = UIColor(red: 254/255.0, green: 123/255.0, blue: 135/255.0, alpha: 1.0)
         
-        button.addTarget(self, action: #selector(PhotoListController.presentImagePickerController), forControlEvents: .TouchUpInside)
+        button.addTarget(self, action: #selector(PhotoListController.presentImagePickerController), for: .touchUpInside)
 
         
         return button
@@ -40,11 +40,11 @@ class PhotoListController: UIViewController {
         view.addSubview(cameraButton)
         cameraButton.translatesAutoresizingMaskIntoConstraints = false
         
-        NSLayoutConstraint.activateConstraints([
-            cameraButton.leftAnchor.constraintEqualToAnchor(view.leftAnchor),
-            cameraButton.bottomAnchor.constraintEqualToAnchor(view.bottomAnchor),
-            cameraButton.rightAnchor.constraintEqualToAnchor(view.rightAnchor),
-            cameraButton.heightAnchor.constraintEqualToConstant(56.0)
+        NSLayoutConstraint.activate([
+            cameraButton.leftAnchor.constraint(equalTo: view.leftAnchor),
+            cameraButton.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            cameraButton.rightAnchor.constraint(equalTo: view.rightAnchor),
+            cameraButton.heightAnchor.constraint(equalToConstant: 56.0)
             ])
     }
     
@@ -54,7 +54,7 @@ class PhotoListController: UIViewController {
     
 
     // selectors can only recieve objective c functions ...
-    @objc private func presentImagePickerController() {
+    @objc fileprivate func presentImagePickerController() {
         mediaPickerManager.presentImagePickerController(animated: true)
     }
 
@@ -64,19 +64,19 @@ class PhotoListController: UIViewController {
 // MARK: - Media picker manager delegate
 extension PhotoListController: MediaPickerManagerDelegate {
     
-    func mediaPickerManager(manager: MediaPickerManager, didFinishPickingImage image: UIImage) {
+    func mediaPickerManager(_ manager: MediaPickerManager, didFinishPickingImage image: UIImage) {
         // use open GL Es for the context so we use the GPU and not teh CPU for the filtering
-        let eaglContext = EAGLContext(API: .OpenGLES2)
+        let eaglContext = EAGLContext(api: .openGLES2)
         
-        let ciContext = CIContext(EAGLContext: eaglContext)
+        let ciContext = CIContext(eaglContext: eaglContext!)
         
         
         // create instance of photo filter controler with image
-        let photoFilterController = PhotoFilterController(image: image, context: ciContext, eaglContext: eaglContext)
+        let photoFilterController = PhotoFilterController(image: image, context: ciContext, eaglContext: eaglContext!)
         let navigationController = UINavigationController(rootViewController: photoFilterController)
         
         manager.dismissImagePickerController(animated: true) {
-            self.presentViewController(navigationController, animated: true, completion: nil)
+            self.present(navigationController, animated: true, completion: nil)
         }
         
     }

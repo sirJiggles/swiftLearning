@@ -13,7 +13,7 @@ import CoreImage
 
 final class FilteredImageBuilder {
     
-    private struct PhotoFilter {
+    fileprivate struct PhotoFilter {
         static let colorClamp = "CIColorClamp"
         static let colorControls = "CIColorControls"
         static let photoEffectInstant = "CIPhotoEffectInstant"
@@ -46,8 +46,8 @@ final class FilteredImageBuilder {
         }
     }
     
-    private let image: UIImage
-    private let context: CIContext
+    fileprivate let image: UIImage
+    fileprivate let context: CIContext
     
     
     init(image: UIImage, context: CIContext) {
@@ -63,18 +63,18 @@ final class FilteredImageBuilder {
         return filters.map { image(self.image, withFilter: $0) }
     }
     
-    func image(image: UIImage, withFilter filter:CIFilter) -> CIImage {
+    func image(_ image: UIImage, withFilter filter:CIFilter) -> CIImage {
         // ci image is as we are processing it
         
         // using coalecing we unwrap and the first value and use if it not nil
         // if it is nil however we use the second value, in this case the image, force unwrapped and converted
-        let inputImage = image.CIImage ?? CIImage(image: image)!
+        let inputImage = image.ciImage ?? CIImage(image: image)!
         
         filter.setValue(inputImage, forKey: kCIInputImageKey)
         
         let outputImage = filter.outputImage!
         
-        return outputImage.imageByCroppingToRect(inputImage.extent)
+        return outputImage.cropping(to: inputImage.extent)
         
         // extent is the size of the image (as filter could have chnaged the size of the image)
 //        return context.createCGImage(filter.outputImage!, fromRect: inputImage.extent)

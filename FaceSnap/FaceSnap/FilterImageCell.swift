@@ -13,7 +13,7 @@ class FilterImageCell: UICollectionViewCell {
     
     // the string initializer here sets the name of the string to be the name of the class
     // fancy
-    static let reuseIdentifier = String(FilterImageCell.self)
+    static let reuseIdentifier = String(describing: FilterImageCell.self)
     
     var eaglContext: EAGLContext!
     var ciContext: CIContext!
@@ -36,11 +36,11 @@ class FilterImageCell: UICollectionViewCell {
         glkView.translatesAutoresizingMaskIntoConstraints = false;
         
         // fill the container of the content view
-        NSLayoutConstraint.activateConstraints([
-            glkView.topAnchor.constraintEqualToAnchor(contentView.topAnchor),
-            glkView.leftAnchor.constraintEqualToAnchor(contentView.leftAnchor),
-            glkView.rightAnchor.constraintEqualToAnchor(contentView.rightAnchor),
-            glkView.bottomAnchor.constraintEqualToAnchor(contentView.bottomAnchor)
+        NSLayoutConstraint.activate([
+            glkView.topAnchor.constraint(equalTo: contentView.topAnchor),
+            glkView.leftAnchor.constraint(equalTo: contentView.leftAnchor),
+            glkView.rightAnchor.constraint(equalTo: contentView.rightAnchor),
+            glkView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
         ])
     }
     
@@ -49,13 +49,13 @@ class FilterImageCell: UICollectionViewCell {
 
 
 extension FilterImageCell: GLKViewDelegate {
-    func glkView(view: GLKView, drawInRect rect: CGRect) {
+    func glkView(_ view: GLKView, drawIn rect: CGRect) {
         // get size of space we want to draw in
         let drawableRectSize = CGSize(width: glkView.drawableWidth, height: glkView.drawableHeight)
-        let drawableRect = CGRect(origin: CGPointZero, size: drawableRectSize)
+        let drawableRect = CGRect(origin: CGPoint.zero, size: drawableRectSize)
         
         // ask context to draw image
-        ciContext.drawImage(image, inRect: drawableRect, fromRect: image.extent)
+        ciContext.draw(image, in: drawableRect, from: image.extent)
     }
 }
 

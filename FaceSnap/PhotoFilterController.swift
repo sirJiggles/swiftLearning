@@ -9,30 +9,30 @@
 import UIKit
 
 class PhotoFilterController: UIViewController {
-    private var mainImage: UIImage {
+    fileprivate var mainImage: UIImage {
         didSet {
             photoImageView.image = mainImage
         }
     }
-    private let context: CIContext
-    private let eaglContext: EAGLContext
+    fileprivate let context: CIContext
+    fileprivate let eaglContext: EAGLContext
     
-    private let photoImageView: UIImageView = {
+    fileprivate let photoImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.contentMode = .ScaleAspectFit
+        imageView.contentMode = .scaleAspectFit
         return imageView
     }()
     
-    private lazy var filterHeaderLabel: UILabel = {
+    fileprivate lazy var filterHeaderLabel: UILabel = {
         let label = UILabel()
         label.text = "Select a filter"
-        label.textAlignment = .Center
+        label.textAlignment = .center
         return label
     }()
     
     lazy var filtersCollectionView: UICollectionView = {
         let flowLayout = UICollectionViewFlowLayout()
-        flowLayout.scrollDirection = .Horizontal
+        flowLayout.scrollDirection = .horizontal
         // spacing of each item
         flowLayout.minimumLineSpacing = 10
         
@@ -44,19 +44,19 @@ class PhotoFilterController: UIViewController {
         flowLayout.itemSize = CGSize(width: 100, height: 100)
         
         
-        let collectionView = UICollectionView(frame: CGRectZero, collectionViewLayout: flowLayout)
+        let collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: flowLayout)
         
-        collectionView.backgroundColor = .whiteColor()
+        collectionView.backgroundColor = .white
         
         collectionView.dataSource = self
         collectionView.delegate = self
         
-        collectionView.registerClass(FilterImageCell.self, forCellWithReuseIdentifier: FilterImageCell.reuseIdentifier)
+        collectionView.register(FilterImageCell.self, forCellWithReuseIdentifier: FilterImageCell.reuseIdentifier)
         
         return collectionView
     }()
     
-    private lazy var filteredImages: [CIImage] = {
+    fileprivate lazy var filteredImages: [CIImage] = {
         // create instance of filtered image builder class and pass in image we want to work with
         let filteredImageBuilder = FilteredImageBuilder(image: self.mainImage, context: self.context)
         
@@ -79,11 +79,11 @@ class PhotoFilterController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let cancelButton = UIBarButtonItem(barButtonSystemItem: .Cancel, target: self, action: #selector(PhotoFilterController.dismissPhotFilterController))
+        let cancelButton = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(PhotoFilterController.dismissPhotFilterController))
         
         navigationItem.leftBarButtonItem = cancelButton
         
-        let nextButton = UIBarButtonItem(title: "Next", style: .Plain, target: self, action: #selector(PhotoFilterController.presentMetadataController))
+        let nextButton = UIBarButtonItem(title: "Next", style: .plain, target: self, action: #selector(PhotoFilterController.presentMetadataController))
         
         navigationItem.rightBarButtonItem = nextButton
     }
@@ -99,18 +99,18 @@ class PhotoFilterController: UIViewController {
         filtersCollectionView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(filtersCollectionView)
         
-        NSLayoutConstraint.activateConstraints([
-            filtersCollectionView.bottomAnchor.constraintEqualToAnchor(view.bottomAnchor),
-            filtersCollectionView.leftAnchor.constraintEqualToAnchor(view.leftAnchor),
-            filtersCollectionView.rightAnchor.constraintEqualToAnchor(view.rightAnchor),
-            filtersCollectionView.heightAnchor.constraintEqualToConstant(200.0),
-            filtersCollectionView.topAnchor.constraintEqualToAnchor(filterHeaderLabel.bottomAnchor),
-            filterHeaderLabel.leftAnchor.constraintEqualToAnchor(view.leftAnchor),
-            filterHeaderLabel.rightAnchor.constraintEqualToAnchor(view.rightAnchor),
-            photoImageView.bottomAnchor.constraintEqualToAnchor(filtersCollectionView.topAnchor),
-            photoImageView.topAnchor.constraintEqualToAnchor(view.topAnchor),
-            photoImageView.leftAnchor.constraintEqualToAnchor(view.leftAnchor),
-            photoImageView.rightAnchor.constraintEqualToAnchor(view.rightAnchor)
+        NSLayoutConstraint.activate([
+            filtersCollectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            filtersCollectionView.leftAnchor.constraint(equalTo: view.leftAnchor),
+            filtersCollectionView.rightAnchor.constraint(equalTo: view.rightAnchor),
+            filtersCollectionView.heightAnchor.constraint(equalToConstant: 200.0),
+            filtersCollectionView.topAnchor.constraint(equalTo: filterHeaderLabel.bottomAnchor),
+            filterHeaderLabel.leftAnchor.constraint(equalTo: view.leftAnchor),
+            filterHeaderLabel.rightAnchor.constraint(equalTo: view.rightAnchor),
+            photoImageView.bottomAnchor.constraint(equalTo: filtersCollectionView.topAnchor),
+            photoImageView.topAnchor.constraint(equalTo: view.topAnchor),
+            photoImageView.leftAnchor.constraint(equalTo: view.leftAnchor),
+            photoImageView.rightAnchor.constraint(equalTo: view.rightAnchor)
             ])
     }
 }
@@ -119,18 +119,18 @@ class PhotoFilterController: UIViewController {
 //Mark: - UICollectionViewDataSource
 extension PhotoFilterController: UICollectionViewDataSource {
     
-    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
     
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return filteredImages.count
     }
     
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(FilterImageCell.reuseIdentifier, forIndexPath: indexPath) as! FilterImageCell
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FilterImageCell.reuseIdentifier, for: indexPath) as! FilterImageCell
         
-        let ciImage = filteredImages[indexPath.row]
+        let ciImage = filteredImages[(indexPath as NSIndexPath).row]
         
         cell.ciContext = context
         cell.eaglContext = eaglContext
@@ -145,23 +145,24 @@ extension PhotoFilterController: UICollectionViewDataSource {
 extension PhotoFilterController: UICollectionViewDelegate {
     
     // click a filtered image
-    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        let ciImage = filteredImages[indexPath.row]
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let ciImage = filteredImages[(indexPath as NSIndexPath).row]
         
         // use context to draw cgimage in bounds of main imag
-        let cgImage = context.createCGImage(ciImage, fromRect: ciImage.extent)
-        mainImage = UIImage(CGImage: cgImage)
+        let cgImage = context.createCGImage(ciImage, from: ciImage.extent)
+        mainImage = UIImage(cgImage: cgImage!)
     }
 }
 
 //Mark - Navigation
 extension PhotoFilterController {
-    @objc private func dismissPhotFilterController () {
-        dismissViewControllerAnimated(true, completion: nil)
+    @objc fileprivate func dismissPhotFilterController () {
+        dismiss(animated: true, completion: nil)
     }
     
-    @objc private func presentMetadataController() {
-        
+    @objc fileprivate func presentMetadataController() {
+        let photoMetaDataController = PhotoMetadataController(photo: self.mainImage)
+        self.navigationController?.pushViewController(photoMetaDataController, animated: true)
     }
 }
 
