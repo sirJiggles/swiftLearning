@@ -16,6 +16,13 @@
 		7F5E6A531D859F2D000140B9 /* PhotoFilterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5E6A521D859F2D000140B9 /* PhotoFilterController.swift */; };
 		7F5E6A551D85A2A1000140B9 /* FilteredImageBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5E6A541D85A2A1000140B9 /* FilteredImageBuilder.swift */; };
 		7F5E6A571D85F5DC000140B9 /* FilterImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5E6A561D85F5DC000140B9 /* FilterImageCell.swift */; };
+		7FE1C0641DA3A550007A5285 /* CoreDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FE1C0631DA3A550007A5285 /* CoreDataController.swift */; };
+		7FE1C0671DA3A6DE007A5285 /* FaceSnap.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7FE1C0651DA3A6DE007A5285 /* FaceSnap.xcdatamodeld */; };
+		7FE1C0691DA3A9CC007A5285 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FE1C0681DA3A9CC007A5285 /* Photo.swift */; };
+		7FE1C06B1DA3AA6F007A5285 /* Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FE1C06A1DA3AA6F007A5285 /* Tag.swift */; };
+		7FE1C06D1DA3AA8D007A5285 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FE1C06C1DA3AA8D007A5285 /* Location.swift */; };
+		7FE1C06F1DA3CBA0007A5285 /* PhotoDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FE1C06E1DA3CBA0007A5285 /* PhotoDataSource.swift */; };
+		7FE1C0711DA3CC7F007A5285 /* PhotoFetchedResultsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FE1C0701DA3CC7F007A5285 /* PhotoFetchedResultsController.swift */; };
 		7FF941C51D88758200392C21 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FF941C41D88758200392C21 /* LocationManager.swift */; };
 /* End PBXBuildFile section */
 
@@ -31,6 +38,13 @@
 		7F5E6A521D859F2D000140B9 /* PhotoFilterController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PhotoFilterController.swift; path = ../PhotoFilterController.swift; sourceTree = "<group>"; };
 		7F5E6A541D85A2A1000140B9 /* FilteredImageBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilteredImageBuilder.swift; sourceTree = "<group>"; };
 		7F5E6A561D85F5DC000140B9 /* FilterImageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterImageCell.swift; sourceTree = "<group>"; };
+		7FE1C0631DA3A550007A5285 /* CoreDataController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataController.swift; sourceTree = "<group>"; };
+		7FE1C0661DA3A6DE007A5285 /* FaceSnap.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = FaceSnap.xcdatamodel; sourceTree = "<group>"; };
+		7FE1C0681DA3A9CC007A5285 /* Photo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
+		7FE1C06A1DA3AA6F007A5285 /* Tag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tag.swift; sourceTree = "<group>"; };
+		7FE1C06C1DA3AA8D007A5285 /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
+		7FE1C06E1DA3CBA0007A5285 /* PhotoDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoDataSource.swift; sourceTree = "<group>"; };
+		7FE1C0701DA3CC7F007A5285 /* PhotoFetchedResultsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoFetchedResultsController.swift; sourceTree = "<group>"; };
 		7FF941C41D88758200392C21 /* LocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -92,6 +106,8 @@
 				7F5E6A521D859F2D000140B9 /* PhotoFilterController.swift */,
 				7F5E6A3C1D858D68000140B9 /* PhotoListController.swift */,
 				7F56AB331D8744E000E01608 /* PhotoMetadataController.swift */,
+				7FE1C0631DA3A550007A5285 /* CoreDataController.swift */,
+				7FE1C0701DA3CC7F007A5285 /* PhotoFetchedResultsController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -107,6 +123,11 @@
 		7F5E6A511D859EB2000140B9 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				7FE1C0651DA3A6DE007A5285 /* FaceSnap.xcdatamodeld */,
+				7FE1C0681DA3A9CC007A5285 /* Photo.swift */,
+				7FE1C06A1DA3AA6F007A5285 /* Tag.swift */,
+				7FE1C06C1DA3AA8D007A5285 /* Location.swift */,
+				7FE1C06E1DA3CBA0007A5285 /* PhotoDataSource.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -138,7 +159,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0730;
-				LastUpgradeCheck = 0730;
+				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = Gareth;
 				TargetAttributes = {
 					7F5E6A361D858D68000140B9 = {
@@ -182,12 +203,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7FE1C06B1DA3AA6F007A5285 /* Tag.swift in Sources */,
+				7FE1C06F1DA3CBA0007A5285 /* PhotoDataSource.swift in Sources */,
+				7FE1C0671DA3A6DE007A5285 /* FaceSnap.xcdatamodeld in Sources */,
 				7F5E6A551D85A2A1000140B9 /* FilteredImageBuilder.swift in Sources */,
 				7F5E6A4D1D85925C000140B9 /* MediaPickerManager.swift in Sources */,
 				7F5E6A3D1D858D68000140B9 /* PhotoListController.swift in Sources */,
 				7F5E6A531D859F2D000140B9 /* PhotoFilterController.swift in Sources */,
+				7FE1C06D1DA3AA8D007A5285 /* Location.swift in Sources */,
 				7FF941C51D88758200392C21 /* LocationManager.swift in Sources */,
+				7FE1C0641DA3A550007A5285 /* CoreDataController.swift in Sources */,
+				7FE1C0691DA3A9CC007A5285 /* Photo.swift in Sources */,
 				7F5E6A3B1D858D68000140B9 /* AppDelegate.swift in Sources */,
+				7FE1C0711DA3CC7F007A5285 /* PhotoFetchedResultsController.swift in Sources */,
 				7F56AB341D8744E000E01608 /* PhotoMetadataController.swift in Sources */,
 				7F5E6A571D85F5DC000140B9 /* FilterImageCell.swift in Sources */,
 			);
@@ -221,8 +249,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -267,8 +297,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -287,6 +319,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -338,6 +371,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		7FE1C0651DA3A6DE007A5285 /* FaceSnap.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				7FE1C0661DA3A6DE007A5285 /* FaceSnap.xcdatamodel */,
+			);
+			currentVersion = 7FE1C0661DA3A6DE007A5285 /* FaceSnap.xcdatamodel */;
+			path = FaceSnap.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 7F5E6A2F1D858D68000140B9 /* Project object */;
 }

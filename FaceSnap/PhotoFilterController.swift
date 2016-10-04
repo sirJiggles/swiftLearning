@@ -154,7 +154,7 @@ extension PhotoFilterController: UICollectionViewDelegate {
     }
 }
 
-//Mark - Navigation
+//Mark: - Navigation
 extension PhotoFilterController {
     @objc fileprivate func dismissPhotFilterController () {
         dismiss(animated: true, completion: nil)

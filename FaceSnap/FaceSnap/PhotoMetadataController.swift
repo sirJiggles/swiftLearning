@@ -63,9 +63,20 @@ class PhotoMetadataController: UITableViewController {
     
     fileprivate var location: CLLocation?
     
+    fileprivate lazy var tagsTextField: UITextField = {
+        let textField = UITextField()
+        textField.placeholder = "Summer vacation"
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        return textField
+    }()
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let saveButton = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(PhotoMetadataController.savePhotoWithMetadata))
+        
+        navigationItem.rightBarButtonItem = saveButton
     }
     
     
@@ -110,6 +121,17 @@ extension PhotoMetadataController {
                 locationLabel.bottomAnchor.constraint(equalTo: cell.contentView.bottomAnchor),
                 locationLabel.leftAnchor.constraint(equalTo: cell.contentView.leftAnchor, constant: 20.0)
                 ])
+        case(2,0):
+            
+            cell.contentView.addSubview(tagsTextField)
+            
+            NSLayoutConstraint.activate([
+                tagsTextField.topAnchor.constraint(equalTo: cell.contentView.topAnchor),
+                tagsTextField.leftAnchor.constraint(equalTo: cell.contentView.leftAnchor, constant: 20.0),
+                tagsTextField.bottomAnchor.constraint(equalTo: cell.contentView.bottomAnchor),
+                tagsTextField.rightAnchor.constraint(equalTo: cell.contentView.rightAnchor, constant: 16.0)
+                ])
+            
         default: break
         }
         
@@ -118,7 +140,44 @@ extension PhotoMetadataController {
     }
 }
 
-// MARK - UITableViewDelegate
+// MARK: - Helper methods
+extension PhotoMetadataController {
+    // todo use text delegate methods to validate that the text is not empty and so on
+    
+    func tagsFromTextField() -> [String] {
+        guard let tags = tagsTextField.text else {
+            return []
+        }
+        // split the text 
+        let commaSeperatedTextSubSeq = tags.characters.split(separator: ",")
+        // convert to strings
+        let commaSeperatedStrings = commaSeperatedTextSubSeq.map(String.init)
+        // convert to lowercase
+        let lowercaseTags = commaSeperatedStrings.map({ $0.lowercased() })
+        
+        // return the array that contains no white space and new lines
+        return lowercaseTags.map({
+            $0.trimmingCharacters(in: NSCharacterSet.whitespacesAndNewlines)
+        })
+    }
+}
+
+// MARK: - Persistance
+
+extension PhotoMetadataController {
+    @objc fileprivate func savePhotoWithMetadata() {
+        let tags = tagsFromTextField()
+        // create the model record
+        Photo.photoWith(image: photo, tags: tags, location: location)
+        
+        // save it
+        CoreDataController.save()
+        
+        dismiss(animated: true, completion: nil)
+    }
+}
+
+// MARK: - UITableViewDelegate
 extension PhotoMetadataController {
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         switch((indexPath as NSIndexPath).section, (indexPath as NSIndexPath).row) {
@@ -154,6 +213,20 @@ extension PhotoMetadataController {
             }
         default:
             break
+        }
+    }
+    
+    // Sets the header for each section in the table view
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        switch section {
+        case 0:
+            return "Photo"
+        case 1:
+            return "Enter a location"
+        case 2:
+            return "Enter tags"
+        default:
+            return nil
         }
     }
 }
