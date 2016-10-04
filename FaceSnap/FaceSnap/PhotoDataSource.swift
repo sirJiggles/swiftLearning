@@ -13,7 +13,10 @@ class PhotoDataSource {
     fileprivate let collectionView: UICollectionView
     fileprivate let managedObjectContext = CoreDataController.sharedInstance.managedObjectContext
     
-    init(fetchRequest: NSFetchRequest, collectionView: UICollectionView) {
+    private let fetchedResultsController: PhotoFetchedResultsController
+    
+    init(fetchRequest: NSFetchRequest<Photo>, collectionView: UICollectionView) {
         self.collectionView = collectionView
+        self.fetchedResultsController = PhotoFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.managedObjectContext, collectionView: self.collectionView)
     }
 }
