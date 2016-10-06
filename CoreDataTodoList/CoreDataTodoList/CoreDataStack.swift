@@ -9,7 +9,7 @@
 import Foundation
 import CoreData
 
-class DataController: NSObject {
+public class DataController: NSObject {
     // each app has container in its sandbox for exaple bundler
     // there is also data container, data used by app and user. This is 
     // then divided into more directorys and the one we care about here is
@@ -31,7 +31,7 @@ class DataController: NSObject {
     
     private lazy var managedObjectModel: NSManagedObjectModel = {
         // init the managed object model from file
-        let modelUrl = Bundle.main.url(forResource: "TodoList", withExtension: "momd")!
+        let modelUrl = Bundle.main.url(forResource: "Todolist", withExtension: "momd")!
         
         // create an return managed object model
         let managedObjectModel = NSManagedObjectModel(contentsOf: modelUrl)

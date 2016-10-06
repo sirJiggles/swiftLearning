@@ -9,6 +9,9 @@
 import UIKit
 
 class ViewController: UIViewController {
+    
+    @IBOutlet weak var TextField: UITextField!
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,6 +23,12 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
+    @IBAction func Save(_ sender: AnyObject) {
+        dismiss(animated: true, completion: nil)
+    }
 
+    @IBAction func Cancel(_ sender: AnyObject) {
+        dismiss(animated: true, completion: nil)
+    }
 }
 
