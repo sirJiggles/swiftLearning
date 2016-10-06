@@ -10,6 +10,13 @@ import Foundation
 import CoreData
 
 public class DataController: NSObject {
+    
+    // singleton of data controller
+    static let sharedInstance = DataController()
+    
+    // as private init cant use from outisde the class, thus has to be used as singleton
+    private override init() {}
+    
     // each app has container in its sandbox for exaple bundler
     // there is also data container, data used by app and user. This is 
     // then divided into more directorys and the one we care about here is
@@ -85,6 +92,18 @@ public class DataController: NSObject {
         
         return managedObjectContext
     }()
+    
+    // MARK: - Saving
+    public func saveContext() {
+        // dont always want to save as, save is complex. to reduce only call save if any changes
+        if managedObjectContext.hasChanges {
+            do {
+                try managedObjectContext.save()
+            } catch let error as NSError {
+                print("unresoved error \(error), \(error.userInfo)")
+            }
+        }
+    }
     
     
 }
