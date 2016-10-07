@@ -68,6 +68,9 @@
                                     <frame key="frameInset" width="375" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="lmO-C3-9Q5" kind="show" identifier="showItem" id="12L-16-Epk"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -122,6 +125,55 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aNj-mQ-d6Z" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1510" y="133"/>
+        </scene>
+        <!--Detail View Controller-->
+        <scene sceneID="vVO-Jd-s4I">
+            <objects>
+                <viewController id="lmO-C3-9Q5" customClass="DetailViewController" customModule="CoreDataTodoList" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="QvO-mc-dPf"/>
+                        <viewControllerLayoutGuide type="bottom" id="fdd-6F-Ne8"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="OlX-CI-Fkz">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dO5-Pb-6y2">
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EQB-Z9-LJL">
+                                <color key="backgroundColor" red="0.0" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="56" id="IhT-41-k6H"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="Save"/>
+                                <connections>
+                                    <action selector="save:" destination="lmO-C3-9Q5" eventType="touchUpInside" id="zqS-0D-9jj"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="EQB-Z9-LJL" secondAttribute="trailing" id="1ph-s7-3L2"/>
+                            <constraint firstItem="dO5-Pb-6y2" firstAttribute="centerX" secondItem="OlX-CI-Fkz" secondAttribute="centerX" id="3ob-QX-trD"/>
+                            <constraint firstItem="dO5-Pb-6y2" firstAttribute="leading" secondItem="OlX-CI-Fkz" secondAttribute="leadingMargin" constant="8" id="CA2-9q-GPN"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="dO5-Pb-6y2" secondAttribute="trailing" constant="8" id="H8j-YM-iby"/>
+                            <constraint firstItem="EQB-Z9-LJL" firstAttribute="leading" secondItem="OlX-CI-Fkz" secondAttribute="leading" id="Pq0-ru-dL5"/>
+                            <constraint firstItem="fdd-6F-Ne8" firstAttribute="top" secondItem="EQB-Z9-LJL" secondAttribute="bottom" id="ZUm-vu-ag0"/>
+                            <constraint firstItem="dO5-Pb-6y2" firstAttribute="centerY" secondItem="OlX-CI-Fkz" secondAttribute="centerY" id="uc2-SE-Hal"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="textFiled" destination="dO5-Pb-6y2" id="OLc-x1-jFJ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tvM-54-eCb" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="657" y="841"/>
         </scene>
     </scenes>
 </document>
