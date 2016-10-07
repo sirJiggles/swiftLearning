@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreGraphics
+import CoreData
 
 class PhotoListController: UIViewController {
     
@@ -53,6 +54,8 @@ class PhotoListController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setupNavigationBar()
+        
         collectionView.dataSource = dataSource
     }
     
@@ -89,7 +92,7 @@ class PhotoListController: UIViewController {
     
 
     // selectors can only recieve objective c functions ...
-    @objc fileprivate func presentImagePickerController() {
+    @objc private func presentImagePickerController() {
         mediaPickerManager.presentImagePickerController(animated: true)
     }
 
@@ -113,9 +116,52 @@ extension PhotoListController: MediaPickerManagerDelegate {
         manager.dismissImagePickerController(animated: true) {
             self.present(navigationController, animated: true, completion: nil)
         }
-        
     }
     
+}
+
+// Mark: - Navigation
+extension PhotoListController {
+    fileprivate func setupNavigationBar() {
+        let sortTagsButton = UIBarButtonItem(title: "Tags", style: .plain, target: self, action: #selector(PhotoListController.presentSortController))
+        // TODO add the sort by location button
+        navigationItem.setRightBarButtonItems([sortTagsButton], animated: true)
+    }
+    
+    @objc private func presentSortController() {
+        // get the tags using the request
+        let tagDataSource = SortableDataSource<Tag>(fetchRequest: Tag.allTagsRequest, managedObjectContext: CoreDataController.sharedInstance.managedObjectContext)
+        
+        let sortItemSelect = SortItemSelector(sortItems: tagDataSource.results)
+        
+        let sortController = PhotoSortListController(dataSource: tagDataSource, sortItemSelector: sortItemSelect)
+        
+        sortController.onSortSelection = { checkedItems in
+            
+            if !checkedItems.isEmpty {
+                var predicates = [NSPredicate]()
+                
+                for tag in checkedItems {
+                    let predicate = NSPredicate(format: "%K CONTAINS %@", "tags.title", tag.title)
+                    predicates.append(predicate)
+                }
+                
+                // compound predcates are collection of sub predicates and how to treat them if some
+                // rules are matched for example first
+                // eg should summer and vacation only be matched or summer only or vacation only and so on for tags
+                let compoundPredicate = NSCompoundPredicate(orPredicateWithSubpredicates: predicates)
+                
+                self.dataSource.performFetch(withPredicate: compoundPredicate)
+            } else {
+                self.dataSource.performFetch(withPredicate: nil)
+            }
+            
+        }
+        
+        let navigationController = UINavigationController(rootViewController: sortController)
+        
+        present(navigationController, animated: true, completion: nil)
+    }
 }
 
 

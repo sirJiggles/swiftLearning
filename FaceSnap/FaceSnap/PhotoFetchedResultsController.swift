@@ -34,6 +34,14 @@ class PhotoFetchedResultsController: NSFetchedResultsController<Photo>, NSFetche
         }
     }
     
+    // optional as all will select all data no predicate
+    func performFetchWithPredicate(withPredicate predicate: NSPredicate?) {
+        // first delete all the caches (even though we are not caching), nil removes all
+        NSFetchedResultsController<Photo>.deleteCache(withName: nil)
+        
+        fetchRequest.predicate = predicate
+    }
+    
     // MARK: - NSFetchedResultsControllerDelegate
     
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
