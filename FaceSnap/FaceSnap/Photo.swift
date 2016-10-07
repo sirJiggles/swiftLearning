@@ -65,4 +65,20 @@ extension Photo {
     @NSManaged var tags: Set<Tag>
     
     @NSManaged var location: Location?
+    
+    // return UI image from the image property
+    var photoimage: UIImage {
+        return UIImage(data: image as Data)!
+    }
 }
+
+// photo request fetch
+extension Photo {
+    @nonobjc static var allPhotosRequest: NSFetchRequest<Photo> = { () -> NSFetchRequest<Photo> in
+        let request = NSFetchRequest<Photo>(entityName: Photo.entityName)
+        request.sortDescriptors = [NSSortDescriptor(key: "date", ascending: true)]
+        return request
+    }()
+}
+
+
